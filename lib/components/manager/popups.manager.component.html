@@ -1,1 +1,6 @@
-
+<utx-popup
+  *ngFor="let popupId of popupIds"
+  (popupReady)="onPopupReady($event)"
+  (popupClosed)="onPopupClosed($event)"
+  [popupId]="popupId"
+></utx-popup>

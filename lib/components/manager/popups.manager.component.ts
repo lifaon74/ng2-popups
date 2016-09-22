@@ -7,8 +7,27 @@ import {PopupService} from '../../services/popup.service';
 
 @Component({
   selector: 'utx-popups',
-  template: 'popups.manager.component.html',
-  styleUrls: ['popups.manager.component.css']
+  // templateUrl: 'popups.manager.component.html',
+  // styleUrls: ['popups.manager.component.css']
+  template: `
+    <utx-popup
+      *ngFor="let popupId of popupIds"
+      (popupReady)="onPopupReady($event)"
+      (popupClosed)="onPopupClosed($event)"
+      [popupId]="popupId"
+    ></utx-popup>
+  `,
+  styles: [`
+    :host {
+      z-index: 99;
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  `]
 })
 export class PopupsManagerComponent {
 

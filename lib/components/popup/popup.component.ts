@@ -6,8 +6,40 @@ import {ComponentInjectorService} from 'ng2-component-injector';
 
 @Component({
   selector: 'utx-popup',
-  templateUrl: 'popup.component.html',
-  styleUrls: ['popup.component.css']
+  // templateUrl: 'popup.component.html',
+  // styleUrls: ['popup.component.css']
+  template: `
+    <div class="content">
+      <template #contentContainer></template>
+    </div>
+  `,
+  styles: [`
+    :host {
+      position: fixed;
+      z-index: 99;
+      display: block;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 250ms;
+    }
+    :host .content {
+      width: 500px;
+      margin: 300px auto 50px;
+      background-color: white;
+      transform: translateY(-100px);
+      transition: transform 250ms;
+    }
+    :host.opened {
+      opacity: 1;
+    }
+    :host.opened .content {
+      transform: translateY(0);
+    }
+  `]
 })
 export class PopupComponent implements OnDestroy, AfterViewInit {
 
