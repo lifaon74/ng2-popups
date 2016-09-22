@@ -1,0 +1,33 @@
+$popup-transition-time: 250ms;
+
+:host {
+  position: fixed;
+  z-index: 99;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(black, 0.5);
+
+  opacity: 0;
+  transition: opacity $popup-transition-time;
+
+  .content {
+    width: 500px;
+
+    margin: 300px auto 50px;
+    background-color: white;
+
+    transform: translateY(-100px);
+    transition: transform $popup-transition-time;
+  }
+
+  &.opened {
+    opacity: 1;
+
+    .content {
+      transform: translateY(0);
+    }
+  }
+}
