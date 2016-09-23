@@ -1,7 +1,6 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import {PopupComponent} from './components/popup/popup.component';
 import {PopupService} from './services/popup.service';
@@ -10,7 +9,7 @@ import {ComponentInjectorService} from 'ng2-component-injector/lib/component.inj
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   declarations: [
     PopupComponent, PopupsManagerComponent
   ],

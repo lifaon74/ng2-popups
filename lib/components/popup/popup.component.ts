@@ -61,7 +61,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   ) {
     this.element = element.nativeElement;
 
-    this.closePromise = new Promise((resolve, reject) => {
+    this.closePromise = new Promise((resolve:any, reject:any) => {
       this._resolveClosePromise = resolve;
     });
   }
@@ -136,7 +136,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   }
 
   private timeoutPromise(timeout:number):Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve:any, reject:any) => {
       setTimeout(() => {
         resolve();
       }, timeout);

@@ -50,7 +50,7 @@ export class PopupsManagerComponent {
     let id = Math.floor(Math.random() * 10e10);
     this.setPopup(id, config);
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve:any, reject:any) => {
       this._resolveOpenPromise = resolve;
     });
   }
