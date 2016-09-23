@@ -1,8 +1,8 @@
 {
   "name": "ng2-popups",
-  "version": "0.1.8",
+  "version": "0.9.0",
   "description": "Angular 2 popups",
-  "main": "index.js",
+  "main": "ng2-popups.js",
   "author": "valentin",
   "license": "MIT",
   "repository": {
