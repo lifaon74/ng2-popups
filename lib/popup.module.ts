@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import {PopupComponent} from './components/popup/popup.component';
 import {PopupService} from './services/popup.service';
 import {PopupsManagerComponent} from './components/manager/popups.manager.component';
-import {ComponentInjectorService} from 'ng2-component-injector/lib/component.injector.service';
+import {ComponentInjectorService} from 'ng2-component-injector/ng2-component-injector';
 
 
 @NgModule({

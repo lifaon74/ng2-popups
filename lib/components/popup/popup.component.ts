@@ -2,7 +2,7 @@ import {
   Component, ViewContainerRef, ViewChild, ElementRef, Input, Output, OnDestroy, EventEmitter, AfterViewInit,
   HostListener
 } from '@angular/core';
-import {ComponentInjectorService} from 'ng2-component-injector';
+import {ComponentInjectorService} from 'ng2-component-injector/ng2-component-injector';
 
 @Component({
   selector: 'utx-popup',
@@ -61,7 +61,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   ) {
     this.element = element.nativeElement;
 
-    this.closePromise = new Promise((resolve:any, reject:any) => {
+    this.closePromise = new Promise<any>((resolve:any, reject:any) => {
       this._resolveClosePromise = resolve;
     });
   }
@@ -96,7 +96,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  close() {
+  close():Promise<any> {
     if(!this.closed) {
       this.closed = true;
       this.element.classList.remove('opened');

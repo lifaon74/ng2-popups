@@ -46,7 +46,7 @@ export class PopupsManagerComponent {
     this.checkIfDisplay();
   }
 
-  open(config:any):Promise<any> {
+  open(config:any):Promise<PopupComponent> {
     let id = Math.floor(Math.random() * 10e10);
     this.setPopup(id, config);
 
