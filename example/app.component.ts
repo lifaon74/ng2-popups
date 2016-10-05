@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, AfterViewInit } from '@angular/core';
-import { PopupService } from '../lib/services/popup.service';
-import { PopupComponent } from '../lib/components/popup/popup.component';
+import { PopupService } from '../src/services/popup.service';
+import { PopupComponent } from '../src/components/popup/popup.component';
 
 /***
  * Inject My component in a new popup
@@ -12,14 +12,13 @@ import { PopupComponent } from '../lib/components/popup/popup.component';
   template: '<span (click)="popup.close()">my component : {{ input }}</span>'
 })
 export class MyComponent implements OnChanges {
-  @Input() popup:PopupComponent; // MANDATORY
-  @Input() input:string;
+  @Input() popup: PopupComponent; // MANDATORY
+  @Input() input: string;
 
   ngOnChanges() {
     console.log(this.input);
   }
 }
-
 
 
 @Component({
@@ -28,7 +27,7 @@ export class MyComponent implements OnChanges {
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(public popupService:PopupService) {
+  constructor(public popupService: PopupService) {
 
   }
 
@@ -39,7 +38,7 @@ export class AppComponent implements AfterViewInit {
       inputs: {
         input: 'hello'
       }
-    }).then((popup:PopupComponent) => {
+    }).then((popup: PopupComponent) => {
       console.log('opened');
 
       popup.closePromise.then(() => {

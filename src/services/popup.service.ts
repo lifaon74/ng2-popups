@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { PopupComponent } from '../components/popup/popup.component';
 
 /**
-  Example :
+ Example :
 
-    let popup;
+ let popup;
 
-    (<any>window)._open = () => {
+ (<any>window)._open = () => {
       NgZone.run(() => {
         this.popupService.open({
           component: MyComponent,
@@ -29,22 +29,22 @@ import { PopupComponent } from '../components/popup/popup.component';
 
 
 
-**/
+ **/
 
 @Injectable()
 export class PopupService {
 
-  private manager:any = null;
+  private manager: any = null;
 
   constructor() {
     // not empty
   }
 
-  registerManager(manager:any) {
+  registerManager(manager: any) {
     this.manager = manager;
   }
 
-  open(config:any):Promise<any> {
+  open(config: any): Promise<any> {
     if(this.manager) {
       return this.manager.open(config);
     } else {
@@ -52,7 +52,7 @@ export class PopupService {
     }
   }
 
-  update(popup:any, config:any) {
+  update(popup: any, config: any) {
     // if(this.manager) {
     //   return this.manager.update(popup, config);
     // } else {
@@ -60,11 +60,11 @@ export class PopupService {
     // }
   }
 
-  close(popup:PopupComponent):Promise<any> {
+  close(popup: PopupComponent): Promise<any> {
     return popup.close();
   }
 
-  closeAll():Promise<any> {
+  closeAll(): Promise<any> {
     if(this.manager) {
       return this.manager.closeAll();
     } else {

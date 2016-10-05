@@ -1,31 +1,27 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "es2015",
     "target": "es5",
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es6", "es2015", "dom"],
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ],
-    "rootDir": "."
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": ["es2015", "dom"]
   },
+  "files": [
+    "ng2-popups.ts",
+    "./src/components/manager/popups.manager.component.ts",
+    "./src/components/popup/popup.component.ts",
+    "./src/services/popup.service.ts"
+  ],
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": true
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
 }

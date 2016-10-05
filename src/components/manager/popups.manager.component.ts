@@ -1,8 +1,8 @@
 import {
   Component, ElementRef
 } from '@angular/core';
-import {PopupComponent} from '../popup/popup.component';
-import {PopupService} from '../../services/popup.service';
+import { PopupComponent } from '../popup/popup.component';
+import { PopupService } from '../../services/popup.service';
 
 
 @Component({
@@ -31,60 +31,57 @@ import {PopupService} from '../../services/popup.service';
 })
 export class PopupsManagerComponent {
 
-  element:HTMLElement;
+  element: HTMLElement;
 
-  popups:any = {};
-  popupIds:number[] = [];
-  private _resolveOpenPromise:any;
+  popups: any = {};
+  popupIds: number[] = [];
+  private _resolveOpenPromise: any;
 
-  constructor(
-    private popupService:PopupService,
-    element:ElementRef
-  ) {
+  constructor(private popupService: PopupService,
+              element: ElementRef) {
     this.element = element.nativeElement;
     this.popupService.registerManager(this);
     this.checkIfDisplay();
   }
 
-  open(config:any):Promise<PopupComponent> {
+  open(config: any): Promise<PopupComponent> {
     let id = Math.floor(Math.random() * 10e10);
     this.setPopup(id, config);
 
-    return new Promise((resolve:any, reject:any) => {
+    return new Promise((resolve: any, reject: any) => {
       this._resolveOpenPromise = resolve;
     });
   }
 
-    onPopupReady(event:any) {
-      let config = this.popups[event.popupId];
-      this.setPopup(event.popupId, event.popup);
+  onPopupReady(event: any) {
+    let config = this.popups[event.popupId];
+    this.setPopup(event.popupId, event.popup);
 
-      event.popup.open(config)
-        .then(() => {
-          this._resolveOpenPromise(event.popup);
-        });
-    }
-
+    event.popup.open(config)
+      .then(() => {
+        this._resolveOpenPromise(event.popup);
+      });
+  }
 
 
   // update(popup:PopupClass, config:any) {
   //
   // }
 
-  close(popup:PopupComponent) {
+  close(popup: PopupComponent) {
     // return popup.component.close()
     // .then(() => {
     //   this.popups.splice(this.popups.indexOf(popup, 1));
     // });
   }
 
-    onPopupClosed(event:any) {
-      delete this.deletePopup(event.popupId);
-    }
+  onPopupClosed(event: any) {
+    delete this.deletePopup(event.popupId);
+  }
 
 
-  closeAll():Promise<any> {
-    let promises:any[] = [];
+  closeAll(): Promise<any> {
+    let promises: any[] = [];
     for(let popupId in this.popups) {
       promises.push(this.popups[popupId].close());
     }
@@ -92,7 +89,7 @@ export class PopupsManagerComponent {
   }
 
 
-  private setPopup(popupId:number, popup:PopupComponent) {
+  private setPopup(popupId: number, popup: PopupComponent) {
     this.popups[popupId] = popup;
     if(this.popupIds.indexOf(popupId) < 0) {
       this.popupIds.push(popupId);
@@ -100,7 +97,7 @@ export class PopupsManagerComponent {
     }
   }
 
-  private deletePopup(popupId:number) {
+  private deletePopup(popupId: number) {
     let index = this.popupIds.indexOf(popupId);
     if(index >= 0) {
       this.popupIds.splice(index, 1);

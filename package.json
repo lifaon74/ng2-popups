@@ -1,18 +1,24 @@
 {
   "name": "ng2-popups",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Angular 2 popups",
-  "main": "ng2-popups.js",
-  "author": "valentin",
-  "license": "MIT",
+  "scripts": {
+    "ngc": "ngc",
+    "compile": "ngc && node make.js",
+    "compile.min": "compile && uglifyjs bundles/ng2-popups.js -o bundles/ng2-popups.min.js"
+  },
+  "main": "bundles/ng2-popups.js",
+  "module": "ng2-popups.js",
+  "typings": "./ng2-popups.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/lifaon74/ng2-popups"
   },
-  "scripts": {
-    "build.bundle": "browserify dist/ng2-popups.js -o dist/ng2-popups.bundled.js",
-    "build.min": "uglifyjs dist/ng2-popups.js -o dist/ng2-popups.min.js",
-    "build": "npm run build.bundle && npm run build.min"
+  "author": "valentin",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": "^2.0.1",
+    "@angular/common": "^2.0.1"
   },
   "devDependencies": {
     "@angular/common": "^2.0.1",
@@ -25,10 +31,12 @@
     "@types/es6-shim": "0.0.29",
     "@types/node": "^6.0.41",
     "rxjs": "^5.0.0-beta.12",
+    "systemjs": "^0.19.39",
+    "systemjs-builder": "^0.15.32",
     "typescript": "^2.0.3",
     "zone.js": "^0.6.21"
   },
   "dependencies": {
-    "ng2-component-injector": "^1.0.7"
+    "ng2-component-injector": "^1.0.8"
   }
 }

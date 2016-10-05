@@ -2,7 +2,7 @@ import {
   Component, ViewContainerRef, ViewChild, ElementRef, Input, Output, OnDestroy, EventEmitter, AfterViewInit,
   HostListener
 } from '@angular/core';
-import {ComponentInjectorService} from 'ng2-component-injector/ng2-component-injector';
+import { ComponentInjectorService } from 'ng2-component-injector';
 
 @Component({
   selector: 'utx-popup',
@@ -45,23 +45,21 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
 
   @ViewChild('contentContainer', { read: ViewContainerRef }) contentContainerRef: ViewContainerRef;
 
-  @Input() popupId:number;
+  @Input() popupId: number;
   @Output() popupReady = new EventEmitter();
   @Output() popupClosed = new EventEmitter();
 
-  element:HTMLElement;
-  closePromise:Promise<any>;
+  element: HTMLElement;
+  closePromise: Promise<any>;
 
-  private _resolveClosePromise:any;
-  private closed:boolean = true;
+  private _resolveClosePromise: any;
+  private closed: boolean = true;
 
-  constructor(
-    private componentInjectorService: ComponentInjectorService,
-    element:ElementRef
-  ) {
+  constructor(private componentInjectorService: ComponentInjectorService,
+              element: ElementRef) {
     this.element = element.nativeElement;
 
-    this.closePromise = new Promise<any>((resolve:any, reject:any) => {
+    this.closePromise = new Promise<any>((resolve: any, reject: any) => {
       this._resolveClosePromise = resolve;
     });
   }
@@ -81,7 +79,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   }
 
 
-  open(config:any):Promise<any> {
+  open(config: any): Promise<any> {
     if(this.closed) {
       this.closed = false;
       return this.inject(config)
@@ -96,19 +94,19 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  close():Promise<any> {
+  close(): Promise<any> {
     if(!this.closed) {
       this.closed = true;
       this.element.classList.remove('opened');
       return this.timeoutPromise(this.getTransitionTime(this.element) || 250)
-      .then(() => {
-        this.popupClosed.emit({
-          popupId: this.popupId,
-          popup: this
-        });
+        .then(() => {
+          this.popupClosed.emit({
+            popupId: this.popupId,
+            popup: this
+          });
 
-        this._resolveClosePromise();
-      });
+          this._resolveClosePromise();
+        });
     } else {
       return Promise.resolve();
       //return Promise.reject(null);
@@ -116,17 +114,17 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   }
 
 
-  @HostListener('click', ['$event']) onClickBackground(event:any) {
+  @HostListener('click', ['$event']) onClickBackground(event: any) {
     if(event.target === this.element) {
       this.close();
     }
   }
 
-  private waitUntilPopupExists():Promise<any> {
+  private waitUntilPopupExists(): Promise<any> {
     this.element.id = 'popup-' + this.popupId;
-    return new Promise((resolve:any, reject:any) => {
-      let timer:any = setInterval(() => {
-        let popup:HTMLElement = document.getElementById(this.element.id);
+    return new Promise((resolve: any, reject: any) => {
+      let timer: any = setInterval(() => {
+        let popup: HTMLElement = document.getElementById(this.element.id);
         if(popup && (popup.getElementsByClassName('content').length > 0)) {
           clearInterval(timer);
           resolve();
@@ -135,29 +133,29 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     });
   }
 
-  private timeoutPromise(timeout:number):Promise<any> {
-    return new Promise((resolve:any, reject:any) => {
+  private timeoutPromise(timeout: number): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
       setTimeout(() => {
         resolve();
       }, timeout);
     });
   }
 
-  private inject(config:any) {
+  private inject(config: any) {
     config.container = this.contentContainerRef;
     config.inputs = config.inputs || {};
     config.inputs.popup = this;
     return this.componentInjectorService.inject(config);
   }
 
-  private getTransitionTime(element:HTMLElement) {
+  private getTransitionTime(element: HTMLElement) {
     let computedStyle = window.getComputedStyle(element);
-    if (computedStyle.transitionDuration) {
+    if(computedStyle.transitionDuration) {
       let timeReg = new RegExp('([\\d\\.]+)((?:s)|(?:ms))', 'g');
       let timeMatch = timeReg.exec(computedStyle.transitionDuration);
-      if (timeMatch) {
+      if(timeMatch) {
         let time = parseFloat(timeMatch[1]);
-        switch (timeMatch[2]) {
+        switch(timeMatch[2]) {
           case 's':
             return time * 1000;
           case 'ms':

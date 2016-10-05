@@ -1,4 +1,5 @@
-export * from './lib/popup.module';
-export * from './lib/components/manager/popups.manager.component';
-export * from './lib/components/popup/popup.component';
-export * from './lib/services/popup.service';
+export * from './src/components/manager/popups.manager.component';
+export * from './src/components/popup/popup.component';
+export * from './src/services/popup.service';
+export declare class PopupModule {
+}
