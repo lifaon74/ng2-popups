@@ -22,6 +22,17 @@ export class AppModule { }
 ```
 And put `<utx-popups></utx-popups>` into your main component template.
 
+Into your SystemJs config you'll need to put :
+```json
+packages: {
+	'ng2-component-injector', {
+		main: 'bundles/ng2-component-injector.js',
+		defaultExtension: 'js'
+	}
+}
+```
+
+
 ## Documentation
 ### PopupService
 **open**
