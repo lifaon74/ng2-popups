@@ -19,7 +19,7 @@
     "./src/services/popup.service.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules", "bundles", "dist"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true

@@ -1,6 +1,6 @@
 {
   "name": "ng2-popups",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Angular 2 popups",
   "scripts": {
     "ngc": "ngc",
@@ -37,6 +37,6 @@
     "zone.js": "^0.6.21"
   },
   "dependencies": {
-    "ng2-component-injector": "^1.0.8"
+    "ng2-component-injector": "^1.1.1"
   }
 }

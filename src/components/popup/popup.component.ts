@@ -2,7 +2,7 @@ import {
   Component, ViewContainerRef, ViewChild, ElementRef, Input, Output, OnDestroy, EventEmitter, AfterViewInit,
   HostListener
 } from '@angular/core';
-import { ComponentInjectorService } from 'ng2-component-injector';
+import { Ng2ComponentInjectorService } from 'ng2-component-injector';
 
 @Component({
   selector: 'utx-popup',
@@ -55,7 +55,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   private _resolveClosePromise: any;
   private closed: boolean = true;
 
-  constructor(private componentInjectorService: ComponentInjectorService,
+  constructor(private ng2ComponentInjectorService: Ng2ComponentInjectorService,
               element: ElementRef) {
     this.element = element.nativeElement;
 
@@ -145,7 +145,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     config.container = this.contentContainerRef;
     config.inputs = config.inputs || {};
     config.inputs.popup = this;
-    return this.componentInjectorService.inject(config);
+    return this.ng2ComponentInjectorService.inject(config);
   }
 
   private getTransitionTime(element: HTMLElement) {
