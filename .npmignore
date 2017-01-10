@@ -12,6 +12,7 @@ npm-debug.log
 .github
 !*.metadata.json
 make.js
+.npmrc
 
 #################
 ## JetBrains
