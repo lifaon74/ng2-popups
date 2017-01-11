@@ -82,7 +82,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   open(config: any): Promise<any> {
     if(this.closed) {
       this.closed = false;
-      return this.inject(config)
+      return this.create(config)
         .then(this.waitUntilPopupExists.bind(this))
         .then(() => {
           this.element.classList.add('opened');
@@ -141,11 +141,11 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     });
   }
 
-  private inject(config: any) {
+  private create(config: any) {
     config.container = this.contentContainerRef;
     config.inputs = config.inputs || {};
     config.inputs.popup = this;
-    return this.ng2ComponentInjectorService.inject(config);
+    return Promise.resolve(this.ng2ComponentInjectorService.create(config));
   }
 
   private getTransitionTime(element: HTMLElement) {

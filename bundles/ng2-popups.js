@@ -2,21 +2,35 @@
 
 (["1"], ["7","3","4"], false, function($__System) {
 var require = this.require, exports = this.exports, module = this.module;
-$__System.register("2", ["3", "4"], function(exports_1, context_1) {
+$__System.register("2", ["3", "4"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, ng2_component_injector_1;
-    var PopupComponent;
+    var __decorate, __metadata, core_1, ng2_component_injector_1, PopupComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (ng2_component_injector_1_1) {
                 ng2_component_injector_1 = ng2_component_injector_1_1;
-            }],
-        execute: function() {
-            exports_1("PopupComponent", PopupComponent = (function () {
+            }
+        ],
+        execute: function () {
+            __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+                var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+                if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+                    r = Reflect.decorate(decorators, target, key, desc);
+                else
+                    for (var i = decorators.length - 1; i >= 0; i--)
+                        if (d = decorators[i])
+                            r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+                return c > 3 && r && Object.defineProperty(target, key, r), r;
+            };
+            __metadata = (this && this.__metadata) || function (k, v) {
+                if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+                    return Reflect.metadata(k, v);
+            };
+            PopupComponent = (function () {
                 function PopupComponent(ng2ComponentInjectorService, element) {
                     var _this = this;
                     this.ng2ComponentInjectorService = ng2ComponentInjectorService;
@@ -44,7 +58,7 @@ $__System.register("2", ["3", "4"], function(exports_1, context_1) {
                     var _this = this;
                     if (this.closed) {
                         this.closed = false;
-                        return this.inject(config)
+                        return this.create(config)
                             .then(this.waitUntilPopupExists.bind(this))
                             .then(function () {
                             _this.element.classList.add('opened');
@@ -98,11 +112,11 @@ $__System.register("2", ["3", "4"], function(exports_1, context_1) {
                         }, timeout);
                     });
                 };
-                PopupComponent.prototype.inject = function (config) {
+                PopupComponent.prototype.create = function (config) {
                     config.container = this.contentContainerRef;
                     config.inputs = config.inputs || {};
                     config.inputs.popup = this;
-                    return this.ng2ComponentInjectorService.inject(config);
+                    return Promise.resolve(this.ng2ComponentInjectorService.create(config));
                 };
                 PopupComponent.prototype.getTransitionTime = function (element) {
                     var computedStyle = window.getComputedStyle(element);
@@ -140,45 +154,71 @@ $__System.register("2", ["3", "4"], function(exports_1, context_1) {
                     // }
                     return null;
                 };
-                PopupComponent.decorators = [
-                    { type: core_1.Component, args: [{
-                                selector: 'utx-popup',
-                                // templateUrl: 'popup.component.html',
-                                // styleUrls: ['popup.component.css']
-                                template: "\n    <div class=\"content\">\n      <template #contentContainer></template>\n    </div>\n  ",
-                                styles: ["\n    :host {\n      position: fixed;\n      z-index: 99;\n      display: block;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background-color: rgba(0, 0, 0, 0.5);\n      opacity: 0;\n      transition: opacity 250ms;\n    }\n    :host .content {\n      width: 500px;\n      margin: 300px auto 50px;\n      background-color: white;\n      transform: translateY(-100px);\n      transition: transform 250ms;\n    }\n    :host.opened {\n      opacity: 1;\n    }\n    :host.opened .content {\n      transform: translateY(0);\n    }\n  "]
-                            },] },
-                ];
-                /** @nocollapse */
-                PopupComponent.ctorParameters = [
-                    { type: ng2_component_injector_1.Ng2ComponentInjectorService, },
-                    { type: core_1.ElementRef, },
-                ];
-                PopupComponent.propDecorators = {
-                    'contentContainerRef': [{ type: core_1.ViewChild, args: ['contentContainer', { read: core_1.ViewContainerRef },] },],
-                    'popupId': [{ type: core_1.Input },],
-                    'popupReady': [{ type: core_1.Output },],
-                    'popupClosed': [{ type: core_1.Output },],
-                    'onClickBackground': [{ type: core_1.HostListener, args: ['click', ['$event'],] },],
-                };
                 return PopupComponent;
-            }()));
+            }());
+            exports_1("PopupComponent", PopupComponent);
+            __decorate([
+                core_1.ViewChild('contentContainer', { read: core_1.ViewContainerRef }),
+                __metadata("design:type", core_1.ViewContainerRef)
+            ], PopupComponent.prototype, "contentContainerRef", void 0);
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", Number)
+            ], PopupComponent.prototype, "popupId", void 0);
+            __decorate([
+                core_1.Output(),
+                __metadata("design:type", Object)
+            ], PopupComponent.prototype, "popupReady", void 0);
+            __decorate([
+                core_1.Output(),
+                __metadata("design:type", Object)
+            ], PopupComponent.prototype, "popupClosed", void 0);
+            __decorate([
+                core_1.HostListener('click', ['$event']),
+                __metadata("design:type", Function),
+                __metadata("design:paramtypes", [Object]),
+                __metadata("design:returntype", void 0)
+            ], PopupComponent.prototype, "onClickBackground", null);
+            exports_1("PopupComponent", PopupComponent = __decorate([
+                core_1.Component({
+                    selector: 'utx-popup',
+                    // templateUrl: 'popup.component.html',
+                    // styleUrls: ['popup.component.css']
+                    template: "\n    <div class=\"content\">\n      <template #contentContainer></template>\n    </div>\n  ",
+                    styles: ["\n    :host {\n      position: fixed;\n      z-index: 99;\n      display: block;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background-color: rgba(0, 0, 0, 0.5);\n      opacity: 0;\n      transition: opacity 250ms;\n    }\n    :host .content {\n      width: 500px;\n      margin: 300px auto 50px;\n      background-color: white;\n      transform: translateY(-100px);\n      transition: transform 250ms;\n    }\n    :host.opened {\n      opacity: 1;\n    }\n    :host.opened .content {\n      transform: translateY(0);\n    }\n  "]
+                }),
+                __metadata("design:paramtypes", [ng2_component_injector_1.Ng2ComponentInjectorService,
+                    core_1.ElementRef])
+            ], PopupComponent));
         }
-    }
+    };
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9wdXAuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicG9wdXAuY29tcG9uZW50LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7UUFFVyxjQUFjOzs7Ozs7Ozs7O1lBQWQsNEJBQUEsY0FBYyxHQUFHLENBQUM7Z0JBQ3pCLHdCQUF3QiwyQkFBMkIsRUFBRSxPQUFPO29CQUN4RCxJQUFJLEtBQUssR0FBRyxJQUFJLENBQUM7b0JBQ2pCLElBQUksQ0FBQywyQkFBMkIsR0FBRywyQkFBMkIsQ0FBQztvQkFDL0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztvQkFDckMsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLG1CQUFZLEVBQUUsQ0FBQztvQkFDdEMsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7b0JBQ25CLElBQUksQ0FBQyxPQUFPLEdBQUcsT0FBTyxDQUFDLGFBQWEsQ0FBQztvQkFDckMsSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLE9BQU8sQ0FBQyxVQUFVLE9BQU8sRUFBRSxNQUFNO3dCQUNyRCxLQUFLLENBQUMsb0JBQW9CLEdBQUcsT0FBTyxDQUFDO29CQUN6QyxDQUFDLENBQUMsQ0FBQztnQkFDUCxDQUFDO2dCQUNELGNBQWMsQ0FBQyxTQUFTLENBQUMsZUFBZSxHQUFHO29CQUN2QyxJQUFJLEtBQUssR0FBRyxJQUFJLENBQUM7b0JBQ2pCLFVBQVUsQ0FBQzt3QkFDUCxLQUFLLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQzs0QkFDbEIsT0FBTyxFQUFFLEtBQUssQ0FBQyxPQUFPOzRCQUN0QixLQUFLLEVBQUUsS0FBSzt5QkFDZixDQUFDLENBQUM7b0JBQ1AsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO2dCQUNWLENBQUMsQ0FBQztnQkFDRixjQUFjLENBQUMsU0FBUyxDQUFDLFdBQVcsR0FBRztvQkFDbkMsWUFBWTtnQkFDaEIsQ0FBQyxDQUFDO2dCQUNGLGNBQWMsQ0FBQyxT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
-$__System.register("5", ["3"], function(exports_1, context_1) {
+$__System.register("5", ["3"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1;
-    var PopupService;
+    var __decorate, __metadata, core_1, PopupService;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
+            __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+                var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+                if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+                    r = Reflect.decorate(decorators, target, key, desc);
+                else
+                    for (var i = decorators.length - 1; i >= 0; i--)
+                        if (d = decorators[i])
+                            r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+                return c > 3 && r && Object.defineProperty(target, key, r), r;
+            };
+            __metadata = (this && this.__metadata) || function (k, v) {
+                if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+                    return Reflect.metadata(k, v);
+            };
             /**
              Example :
             
@@ -208,7 +248,7 @@ $__System.register("5", ["3"], function(exports_1, context_1) {
             
             
              **/
-            exports_1("PopupService", PopupService = (function () {
+            PopupService = (function () {
                 function PopupService() {
                     this.manager = null;
                     // not empty
@@ -242,33 +282,46 @@ $__System.register("5", ["3"], function(exports_1, context_1) {
                         return Promise.reject(new Error('No manager for PopupService'));
                     }
                 };
-                PopupService.decorators = [
-                    { type: core_1.Injectable },
-                ];
-                /** @nocollapse */
-                PopupService.ctorParameters = [];
                 return PopupService;
-            }()));
+            }());
+            exports_1("PopupService", PopupService);
+            exports_1("PopupService", PopupService = __decorate([
+                core_1.Injectable(),
+                __metadata("design:paramtypes", [])
+            ], PopupService));
         }
-    }
+    };
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9wdXAuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBvcHVwLnNlcnZpY2UuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztRQThCVyxZQUFZOzs7Ozs7O1lBN0J2Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztnQkE0Qkk7WUFDTywwQkFBQSxZQUFZLEdBQUcsQ0FBQztnQkFDdkI7b0JBQ0ksSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUM7b0JBQ3BCLFlBQVk7Z0JBQ2hCLENBQUM7Z0JBQ0QsWUFBWSxDQUFDLFNBQVMsQ0FBQyxlQUFlLEdBQUcsVUFBVSxPQUFPO29CQUN0RCxJQUFJLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQztnQkFDM0IsQ0FBQyxDQUFDO2dCQUNGLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLFVBQVUsTUFBTTtvQkFDMUMsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7d0JBQ2YsTUFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO29CQUNyQyxDQUFDO29CQUNELElBQUksQ0FBQyxDQUFDO3dCQUNGLE1BQU0sQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLElBQUksS0FBSyxDQUFDLDZCQUE2QixDQUFDLENBQUMsQ0FBQztvQkFDcEUsQ0FBQztnQkFDTCxDQUFDLENBQUM7Z0JBQ0YsWUFBWSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEdBQUcsVUFBVSxLQUFLLEVBQUUsTUFBTTtvQkFDbkQscUJBQXFCO29CQUNyQiwrQ0FBK0M7b0JBQy9DLFdBQVc7b0JBQ1gsb0RBQW9EO29CQUNwRCxJQUFJO2dCQUNSLENBQUMsQ0FBQztnQkFDRixZQUFZLENBQUMsU0FBUyxDQUFDLEtBQUssR0FBRyxVQUFVLEtBQUs7b0JBQzFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsS0FBSyxFQUFFLENBQUM7Z0JBQ3pCLENBQUMsQ0FBQztnQkFDRixZQUFZLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRztvQkFDOUIsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7d0JBQ2YsTUFBTSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLENBQUM7b0JBQ25DLENBQUM7b0JBQ0QsSUFBSSxDQUFDLENBQUM7d0JBQ0YsTUFBTSxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsSUFBSSxLQUFLLENBQUMsNkJBQTZCLENBQUMsQ0FBQyxDQUFDO29CQUNwRSxDQUFDO2dCQUNMLENBQUMsQ0FBQztnQkFDRixZQUFZLENBQUMsVUFBVSxHQUFHO29CQUN0QixFQUFFLElBQUksRUFBRSxpQkFBVSxFQUFFO2lCQUN2QixDQUFDO2dCQUNGLGtCQUFrQjtnQkFDbEIsWUFBWSxDQUFDLGNBQWMsR0FBRyxFQUFFLENBQUM7Z0JBQ2pDLE1BQU0sQ0FBQyxZQUFZLENBQUM7WUFDeEIsQ0FBQyxFQUFFLENBQUMsQ0FBQSxDQUFDOzs7O0FBQ0wsczNIQUFzM0gifQ==
-$__System.register("6", ["3", "5"], function(exports_1, context_1) {
+$__System.register("6", ["3", "5"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, popup_service_1;
-    var PopupsManagerComponent;
+    var __decorate, __metadata, core_1, popup_service_1, PopupsManagerComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (popup_service_1_1) {
                 popup_service_1 = popup_service_1_1;
-            }],
-        execute: function() {
-            exports_1("PopupsManagerComponent", PopupsManagerComponent = (function () {
+            }
+        ],
+        execute: function () {
+            __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+                var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+                if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+                    r = Reflect.decorate(decorators, target, key, desc);
+                else
+                    for (var i = decorators.length - 1; i >= 0; i--)
+                        if (d = decorators[i])
+                            r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+                return c > 3 && r && Object.defineProperty(target, key, r), r;
+            };
+            __metadata = (this && this.__metadata) || function (k, v) {
+                if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+                    return Reflect.metadata(k, v);
+            };
+            PopupsManagerComponent = (function () {
                 function PopupsManagerComponent(popupService, element) {
                     this.popupService = popupService;
                     this.popups = {};
@@ -336,47 +389,41 @@ $__System.register("6", ["3", "5"], function(exports_1, context_1) {
                         this.element.style.display = 'block';
                     }
                 };
-                // get popupIds() {
-                //   return Object.keys(this.popups);
-                // }
-                PopupsManagerComponent.decorators = [
-                    { type: core_1.Component, args: [{
-                                selector: 'utx-popups',
-                                // templateUrl: 'popups.manager.component.html',
-                                // styleUrls: ['popups.manager.component.css']
-                                template: "\n    <utx-popup\n      *ngFor=\"let popupId of popupIds\"\n      (popupReady)=\"onPopupReady($event)\"\n      (popupClosed)=\"onPopupClosed($event)\"\n      [popupId]=\"popupId\"\n    ></utx-popup>\n  ",
-                                styles: ["\n    :host {\n      z-index: 99;\n      display: block;\n      position: fixed;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n    }\n  "]
-                            },] },
-                ];
-                /** @nocollapse */
-                PopupsManagerComponent.ctorParameters = [
-                    { type: popup_service_1.PopupService, },
-                    { type: core_1.ElementRef, },
-                ];
                 return PopupsManagerComponent;
-            }()));
+            }());
+            exports_1("PopupsManagerComponent", PopupsManagerComponent);
+            exports_1("PopupsManagerComponent", PopupsManagerComponent = __decorate([
+                core_1.Component({
+                    selector: 'utx-popups',
+                    // templateUrl: 'popups.manager.component.html',
+                    // styleUrls: ['popups.manager.component.css']
+                    template: "\n    <utx-popup\n      *ngFor=\"let popupId of popupIds\"\n      (popupReady)=\"onPopupReady($event)\"\n      (popupClosed)=\"onPopupClosed($event)\"\n      [popupId]=\"popupId\"\n    ></utx-popup>\n  ",
+                    styles: ["\n    :host {\n      z-index: 99;\n      display: block;\n      position: fixed;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n    }\n  "]
+                }),
+                __metadata("design:paramtypes", [popup_service_1.PopupService,
+                    core_1.ElementRef])
+            ], PopupsManagerComponent));
         }
-    }
+    };
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9wdXBzLm1hbmFnZXIuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicG9wdXBzLm1hbmFnZXIuY29tcG9uZW50LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7UUFFVyxzQkFBc0I7Ozs7Ozs7Ozs7WUFBdEIsb0NBQUEsc0JBQXNCLEdBQUcsQ0FBQztnQkFDakMsZ0NBQWdDLFlBQVksRUFBRSxPQUFPO29CQUNqRCxJQUFJLENBQUMsWUFBWSxHQUFHLFlBQVksQ0FBQztvQkFDakMsSUFBSSxDQUFDLE1BQU0sR0FBRyxFQUFFLENBQUM7b0JBQ2pCLElBQUksQ0FBQyxRQUFRLEdBQUcsRUFBRSxDQUFDO29CQUNuQixJQUFJLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQyxhQUFhLENBQUM7b0JBQ3JDLElBQUksQ0FBQyxZQUFZLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxDQUFDO29CQUN4QyxJQUFJLENBQUMsY0FBYyxFQUFFLENBQUM7Z0JBQzFCLENBQUM7Z0JBQ0Qsc0JBQXNCLENBQUMsU0FBUyxDQUFDLElBQUksR0FBRyxVQUFVLE1BQU07b0JBQ3BELElBQUksS0FBSyxHQUFHLElBQUksQ0FBQztvQkFDakIsSUFBSSxFQUFFLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUFDLENBQUM7b0JBQzNDLElBQUksQ0FBQyxRQUFRLENBQUMsRUFBRSxFQUFFLE1BQU0sQ0FBQyxDQUFDO29CQUMxQixNQUFNLENBQUMsSUFBSSxPQUFPLENBQUMsVUFBVSxPQUFPLEVBQUUsTUFBTTt3QkFDeEMsS0FBSyxDQUFDLG1CQUFtQixHQUFHLE9BQU8sQ0FBQztvQkFDeEMsQ0FBQyxDQUFDLENBQUM7Z0JBQ1AsQ0FBQyxDQUFDO2dCQUNGLHNCQUFzQixDQUFDLFNBQVMsQ0FBQyxZQUFZLEdBQUcsVUFBVSxLQUFLO29CQUMzRCxJQUFJLEtBQUssR0FBRyxJQUFJLENBQUM7b0JBQ2pCLElB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
-$__System.register("1", ["7", "3", "4", "2", "5", "6"], function(exports_1, context_1) {
+$__System.register("1", ["7", "3", "4", "2", "5", "6"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var common_1, core_1, ng2_component_injector_1, popup_component_1, popup_service_1, popups_manager_component_1;
-    var PopupModule;
+    var __decorate, __metadata, common_1, core_1, ng2_component_injector_1, popup_component_1, popup_service_1, popups_manager_component_1, PopupModule;
     var exportedNames_1 = {
-        'PopupModule': true
+        "PopupModule": true
     };
     function exportStar_1(m) {
         var exports = {};
-        for(var n in m) {
-            if (n !== "default"&& !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
+        for (var n in m) {
+            if (n !== "default" && !exportedNames_1.hasOwnProperty(n))
+                exports[n] = m[n];
         }
         exports_1(exports);
     }
     return {
-        setters:[
+        setters: [
             function (common_1_1) {
                 common_1 = common_1_1;
             },
@@ -397,34 +444,48 @@ $__System.register("1", ["7", "3", "4", "2", "5", "6"], function(exports_1, cont
             function (popups_manager_component_1_1) {
                 popups_manager_component_1 = popups_manager_component_1_1;
                 exportStar_1(popups_manager_component_1_1);
-            }],
-        execute: function() {
-            exports_1("PopupModule", PopupModule = (function () {
+            }
+        ],
+        execute: function () {
+            __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+                var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+                if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+                    r = Reflect.decorate(decorators, target, key, desc);
+                else
+                    for (var i = decorators.length - 1; i >= 0; i--)
+                        if (d = decorators[i])
+                            r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+                return c > 3 && r && Object.defineProperty(target, key, r), r;
+            };
+            __metadata = (this && this.__metadata) || function (k, v) {
+                if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+                    return Reflect.metadata(k, v);
+            };
+            PopupModule = (function () {
                 function PopupModule() {
                 }
-                PopupModule.decorators = [
-                    { type: core_1.NgModule, args: [{
-                                imports: [common_1.CommonModule, ng2_component_injector_1.Ng2ComponentInjectorModule],
-                                declarations: [
-                                    popup_component_1.PopupComponent, popups_manager_component_1.PopupsManagerComponent
-                                ],
-                                providers: [
-                                    popup_service_1.PopupService
-                                ],
-                                exports: [
-                                    popup_component_1.PopupComponent, popups_manager_component_1.PopupsManagerComponent
-                                ]
-                            },] },
-                ];
-                /** @nocollapse */
-                PopupModule.ctorParameters = [];
                 return PopupModule;
-            }()));
+            }());
+            exports_1("PopupModule", PopupModule);
+            exports_1("PopupModule", PopupModule = __decorate([
+                core_1.NgModule({
+                    imports: [common_1.CommonModule, ng2_component_injector_1.Ng2ComponentInjectorModule],
+                    declarations: [
+                        popup_component_1.PopupComponent, popups_manager_component_1.PopupsManagerComponent
+                    ],
+                    providers: [
+                        popup_service_1.PopupService
+                    ],
+                    exports: [
+                        popup_component_1.PopupComponent, popups_manager_component_1.PopupsManagerComponent
+                    ]
+                }),
+                __metadata("design:paramtypes", [])
+            ], PopupModule));
         }
-    }
+    };
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmcyLXBvcHVwcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5nMi1wb3B1cHMuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztRQVNXLFdBQVc7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1lBQVgseUJBQUEsV0FBVyxHQUFHLENBQUM7Z0JBQ3RCO2dCQUNBLENBQUM7Z0JBQ0QsV0FBVyxDQUFDLFVBQVUsR0FBRztvQkFDckIsRUFBRSxJQUFJLEVBQUUsZUFBUSxFQUFFLElBQUksRUFBRSxDQUFDO2dDQUNiLE9BQU8sRUFBRSxDQUFDLHFCQUFZLEVBQUUsbURBQTBCLENBQUM7Z0NBQ25ELFlBQVksRUFBRTtvQ0FDVixnQ0FBYyxFQUFFLGlEQUFzQjtpQ0FDekM7Z0NBQ0QsU0FBUyxFQUFFO29DQUNQLDRCQUFZO2lDQUNmO2dDQUNELE9BQU8sRUFBRTtvQ0FDTCxnQ0FBYyxFQUFFLGlEQUFzQjtpQ0FDekM7NkJBQ0osRUFBRSxFQUFFO2lCQUNoQixDQUFDO2dCQUNGLGtCQUFrQjtnQkFDbEIsV0FBVyxDQUFDLGNBQWMsR0FBRyxFQUFFLENBQUM7Z0JBQ2hDLE1BQU0sQ0FBQyxXQUFXLENBQUM7WUFDdkIsQ0FBQyxFQUFFLENBQUMsQ0FBQSxDQUFDOzs7O0FBQ0wsMGhGQUEwaEYifQ==
 })
 (function(factory) {
   if (typeof define == 'function' && define.amd)
