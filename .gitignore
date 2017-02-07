@@ -15,6 +15,7 @@ npm-debug.log
 *.metadata.json
 *.ngfactory.ts
 *.ngsummary.ts
+*.ngsummary.json
 
 #################
 ## JetBrains

@@ -3,13 +3,14 @@ import {
   HostListener
 } from '@angular/core';
 import { Ng2ComponentInjectorService } from 'ng2-component-injector';
+import { IPopupConfig } from '../../services/popup.service';
 
 @Component({
   selector: 'utx-popup',
   // templateUrl: 'popup.component.html',
   // styleUrls: ['popup.component.css']
   template: `
-    <div class="content">
+    <div class="content {{contentClassName}}">
       <template #contentContainer></template>
     </div>
   `,
@@ -52,6 +53,9 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   element: HTMLElement;
   closePromise: Promise<any>;
 
+  contentClassName: string = '';
+
+  private backdropClosable: boolean = true;
   private _resolveClosePromise: any;
   private closed: boolean = true;
 
@@ -79,7 +83,7 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
   }
 
 
-  open(config: any): Promise<any> {
+  open(config: IPopupConfigInner): Promise<any> {
     if(this.closed) {
       this.closed = false;
       return this.create(config)
@@ -115,6 +119,9 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
 
 
   @HostListener('click', ['$event']) onClickBackground(event: any) {
+    if (!this.backdropClosable) {
+      return;
+    }
     if(event.target === this.element) {
       this.close();
     }
@@ -141,10 +148,14 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     });
   }
 
-  private create(config: any) {
+  private create(config: IPopupConfigInner) {
     config.container = this.contentContainerRef;
     config.inputs = config.inputs || {};
     config.inputs.popup = this;
+
+    this.contentClassName = config.popupClass || '';
+    this.backdropClosable = config.backdropClosable === undefined ? true : config.backdropClosable;
+
     return Promise.resolve(this.ng2ComponentInjectorService.create(config));
   }
 
@@ -187,4 +198,9 @@ export class PopupComponent implements OnDestroy, AfterViewInit {
     return null;
   }
 
+}
+
+
+export interface IPopupConfigInner extends IPopupConfig {
+  container: any;
 }

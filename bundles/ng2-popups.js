@@ -36,6 +36,8 @@ $__System.register("2", ["3", "4"], function (exports_1, context_1) {
                     this.ng2ComponentInjectorService = ng2ComponentInjectorService;
                     this.popupReady = new core_1.EventEmitter();
                     this.popupClosed = new core_1.EventEmitter();
+                    this.contentClassName = '';
+                    this.backdropClosable = true;
                     this.closed = true;
                     this.element = element.nativeElement;
                     this.closePromise = new Promise(function (resolve, reject) {
@@ -88,6 +90,9 @@ $__System.register("2", ["3", "4"], function (exports_1, context_1) {
                     }
                 };
                 PopupComponent.prototype.onClickBackground = function (event) {
+                    if (!this.backdropClosable) {
+                        return;
+                    }
                     if (event.target === this.element) {
                         this.close();
                     }
@@ -116,6 +121,8 @@ $__System.register("2", ["3", "4"], function (exports_1, context_1) {
                     config.container = this.contentContainerRef;
                     config.inputs = config.inputs || {};
                     config.inputs.popup = this;
+                    this.contentClassName = config.popupClass || '';
+                    this.backdropClosable = config.backdropClosable === undefined ? true : config.backdropClosable;
                     return Promise.resolve(this.ng2ComponentInjectorService.create(config));
                 };
                 PopupComponent.prototype.getTransitionTime = function (element) {
@@ -184,7 +191,7 @@ $__System.register("2", ["3", "4"], function (exports_1, context_1) {
                     selector: 'utx-popup',
                     // templateUrl: 'popup.component.html',
                     // styleUrls: ['popup.component.css']
-                    template: "\n    <div class=\"content\">\n      <template #contentContainer></template>\n    </div>\n  ",
+                    template: "\n    <div class=\"content {{contentClassName}}\">\n      <template #contentContainer></template>\n    </div>\n  ",
                     styles: ["\n    :host {\n      position: fixed;\n      z-index: 99;\n      display: block;\n      top: 0;\n      left: 0;\n      right: 0;\n      bottom: 0;\n      background-color: rgba(0, 0, 0, 0.5);\n      opacity: 0;\n      transition: opacity 250ms;\n    }\n    :host .content {\n      width: 500px;\n      margin: 300px auto 50px;\n      background-color: white;\n      transform: translateY(-100px);\n      transition: transform 250ms;\n    }\n    :host.opened {\n      opacity: 1;\n    }\n    :host.opened .content {\n      transform: translateY(0);\n    }\n  "]
                 }),
                 __metadata("design:paramtypes", [ng2_component_injector_1.Ng2ComponentInjectorService,
@@ -410,15 +417,14 @@ $__System.register("6", ["3", "5"], function (exports_1, context_1) {
 $__System.register("1", ["7", "3", "4", "2", "5", "6"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var __decorate, __metadata, common_1, core_1, ng2_component_injector_1, popup_component_1, popup_service_1, popups_manager_component_1, PopupModule;
+    var __decorate, common_1, core_1, ng2_component_injector_1, popup_component_1, popup_service_1, popups_manager_component_1, PopupModule;
     var exportedNames_1 = {
         "PopupModule": true
     };
     function exportStar_1(m) {
         var exports = {};
         for (var n in m) {
-            if (n !== "default" && !exportedNames_1.hasOwnProperty(n))
-                exports[n] = m[n];
+            if (n !== "default" && !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
         }
         exports_1(exports);
     }
@@ -457,10 +463,6 @@ $__System.register("1", ["7", "3", "4", "2", "5", "6"], function (exports_1, con
                             r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
                 return c > 3 && r && Object.defineProperty(target, key, r), r;
             };
-            __metadata = (this && this.__metadata) || function (k, v) {
-                if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-                    return Reflect.metadata(k, v);
-            };
             PopupModule = (function () {
                 function PopupModule() {
                 }
@@ -479,8 +481,7 @@ $__System.register("1", ["7", "3", "4", "2", "5", "6"], function (exports_1, con
                     exports: [
                         popup_component_1.PopupComponent, popups_manager_component_1.PopupsManagerComponent
                     ]
-                }),
-                __metadata("design:paramtypes", [])
+                })
             ], PopupModule));
         }
     };
