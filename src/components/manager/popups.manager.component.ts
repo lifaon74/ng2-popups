@@ -2,7 +2,7 @@ import {
   Component, ElementRef
 } from '@angular/core';
 import { PopupComponent } from '../popup/popup.component';
-import { PopupService } from '../../services/popup.service';
+import { IPopupConfig, PopupService } from '../../services/popup.service';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class PopupsManagerComponent {
     this.checkIfDisplay();
   }
 
-  open(config: any): Promise<PopupComponent> {
+  open(config: IPopupConfig): Promise<PopupComponent> {
     let id = Math.floor(Math.random() * 10e10);
     this.setPopup(id, config);
 
@@ -89,7 +89,7 @@ export class PopupsManagerComponent {
   }
 
 
-  private setPopup(popupId: number, popup: PopupComponent) {
+  private setPopup(popupId: number, popup: IPopupConfig | PopupComponent) {
     this.popups[popupId] = popup;
     if(this.popupIds.indexOf(popupId) < 0) {
       this.popupIds.push(popupId);
